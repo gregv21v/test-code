@@ -80,7 +80,7 @@ define(
     //inventoryGrid.addUnit(1, 0, orangeUnit);
     //inventoryGrid.addUnit(2, 0, orangeUnit2)
     //inventoryGrid.addUnit(3, 0, yellowUnit)
-    inventoryGrid.addUnit(0, 0, multiUnitItem)
+    inventoryGrid.addMultiUnit(0, 0, multiUnitItem)
 
     inventoryGrid.moveTo({
       x: center.x - (inventoryGrid.width)/2,

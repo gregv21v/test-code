@@ -104,39 +104,75 @@ define(
       }
 
       /**
-        addUnit()
-        @description adds a unit to a specified x, and y coordinate
-          in the grid
-        @param x the x coordinate to add the unit to
-        @param y the y coordinate to add the unit to
-        @param unit the unit to add
-      */
-      addUnit(x, y, unit) {
-        if(unit instanceof MultiUnitItem) {
-          for (var i = 0; i < unit.coordinates.length; i++) {
-            // check if all the units in the MultiUnitItem are within the bounds
-            // of the inventory
-            if(!this.withinBounds(unit.coordinates[i])) {
-              console.warn("MultiUnitItem out of bounds");
-              return;
-            }
-
+       * addMultiUnit
+       * @description add a multiunit to the inventory
+       * @param x the x coordinate of the multiunit
+       * @param y the y coordinate of the multiUnit
+       * @param multiunit the multiunit to add
+       */
+      addMultiUnit(x, y, multiUnit) {
+        // check if all the units in the MultiUnitItem are within the bounds
+        // of the inventory
+        for (var i = 0; i < multiUnit.coordinates.length; i++) {
+          if(!this.withinBounds(multiUnit.coordinates[i])) {
+            console.warn("MultiUnitItem out of bounds");
+            return;
           }
+        }
 
-          for (var i = 0; i < unit.units.length; i++) {
-            this.addUnit(x + unit.coordinates[i].x, y + unit.coordinates[i].y, unit.units[i])
-          }
-        } else { // is a single unit
-          this._slots[x][y].addUnit(unit, this._svg.layers.units);
+
+        // add the individual units to the inventory
+        for (var i = 0; i < multiUnit.units.length; i++) {
+          this.addUnit(x + multiUnit.coordinates[i].x, y + multiUnit.coordinates[i].y, multiUnit.units[i])
         }
       }
 
       /**
-        addUnitToSlot()
-        @description adds a unit to a specified slot
-        @param slot the slot to add the unit to
-        @param unit the unit to add
-      */
+       * addMultiUnit
+       * @description add a multiunit to the inventory
+       * @param x the x coordinate of the multiunit
+       * @param y the y coordinate of the multiUnit
+       * @param multiunit the multiunit to add
+       */
+      addMultiUnitToSlot(slot, multiUnit) {
+        // check if all the units in the MultiUnitItem are within the bounds
+        // of the inventory
+        let x = slot.coordinate.x
+        let y = slot.coordinate.y
+        for (var i = 0; i < multiUnit.coordinates.length; i++) {
+          if(!this.withinBounds(multiUnit.coordinates[i])) {
+            console.warn("MultiUnitItem out of bounds");
+            return;
+          }
+        }
+
+
+        // add the individual units to the inventory
+        for (var i = 0; i < multiUnit.units.length; i++) {
+          this.addUnit(x + multiUnit.coordinates[i].x, y + multiUnit.coordinates[i].y, multiUnit.units[i])
+        }
+      }
+
+
+
+      /**
+       * addUnit()
+       * @description adds a unit to a specified x, and y coordinate
+       *  in the grid
+       * @param x the x coordinate to add the unit to
+       * @param y the y coordinate to add the unit to
+       * @param unit the unit to add
+       */
+      addUnit(x, y, unit) {
+        this._slots[x][y].addUnit(unit, this._svg.layers.units);
+      }
+
+      /**
+       * addUnitToSlot()
+       * @description adds a unit to a specified slot
+       * @param slot the slot to add the unit to
+       * @param unit the unit to add
+       */
       addUnitToSlot(slot, unit) {
         slot.addUnit(unit, this._svg.layers.units);
       }

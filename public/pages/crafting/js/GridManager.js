@@ -71,7 +71,12 @@ define(
       */
       snapToClosestSlot(unit) {
         var closest = this.getClosestSlot(unit)
-        this._grids[closest.grid].addUnitToSlot(closest.slot, unit);
+        if(unit.isPartOfMultiUnit) {
+          this._grids[closest.grid].addMultiUnitToSlot(closest.slot, unit.multiUnit)
+        } else {
+          this._grids[closest.grid].addUnitToSlot(closest.slot, unit);
+        }
+
       }
     }
   }

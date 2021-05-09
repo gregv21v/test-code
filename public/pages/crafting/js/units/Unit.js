@@ -172,6 +172,14 @@ define(
       }
 
       /**
+       * get multiUnit
+       * @description gets multiUnit
+       */
+      get multiUnit() {
+        return this._multiUnit;
+      }
+
+      /**
         set quantity()
         @description sets the quantity of the unit
         @param quantity the quantity to set the unit to

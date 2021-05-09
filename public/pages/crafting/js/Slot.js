@@ -104,11 +104,19 @@ define(
       }
 
       /**
-        getPosition()
+        get position()
         @description gets the position of the slot
       */
       get position() {
         return this._position
+      }
+
+      /**
+       * get coordinate
+       * @description gets the coordinate of this slot in the inventory grid
+       */
+      get coordinate() {
+        return this._coordinate;
       }
 
 
@@ -224,9 +232,18 @@ define(
       */
       onDrag(event) {
         if(this._unit !== null) {
-          this._unit.position = {
-            x: event.x - Slot.size/2,
-            y: event.y - Slot.size/2
+
+          if(!this._unit.isPartOfMultiUnit) {
+            this._unit.position = {
+              x: event.x - Slot.size/2,
+              y: event.y - Slot.size/2
+            }
+          } else {
+            console.log(this._unit);
+            this._unit.multiUnit.position = {
+              x: event.x - Slot.size/2,
+              y: event.y - Slot.size/2
+            }
           }
         }
       }

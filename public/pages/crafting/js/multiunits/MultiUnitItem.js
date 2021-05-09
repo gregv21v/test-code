@@ -31,6 +31,8 @@ define(
           y: this._position.y + Slot.size * y
         }
         unit.multiUnit = this;
+
+        console.log(unit);
         this._units.push(unit)
         this._coordinates.push({x: x, y: y})
       }
